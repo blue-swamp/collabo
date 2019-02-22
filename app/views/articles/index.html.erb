@@ -1,0 +1,82 @@
+<nav class = "navbar navbar-default">
+  <div class = "container-fluid">
+    <div class = "navbar-header">
+      <button type = "button" class ="navbar-toggle collapse" data-target = "#navbarEexample1">
+        <span class = "sr-only">Toggle</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class = "navbar-brand" href = "#">Title</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbarEexample1">
+      <ul class="nav navbar-nav">
+        <li><a href="#">メニューＡ</a></li>
+        <li><a href="#">メニューＢ</a></li>
+        <li><a href="#">メニューＣ</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid">
+<div class="row">
+
+<div class = "col-md-4">
+<h1>新規投稿</h1>
+<%= form_for(@article) do |f| %>
+ 
+    <h4>タイトル</h4>
+    <%= f.text_field :title %>
+ 
+    <h4>本文</h4>
+    <%= f.text_area :body %>
+ 
+ 	<h4>天気</h4>
+ 	<%= f.text_field :weather %>
+
+  <h4>画像</h4>
+  <%= f.attachment_field :image %>
+
+  <%= f.submit '投稿' %>
+ 
+<% end %>
+</div>
+
+<div class = "col-md-8">
+<h1>一覧</h1>
+<table border = "1" width = "100%">
+  <tr>
+  	<th width = "10%">タイトル</th>
+  	<th width = "50%">本文</th>
+  	<th width = "10%">天気</th>
+    <th width = "10%">画像</th>
+  	<th width = "20%"> 最終更新日</th>
+  </tr>
+<% @articles.each do |article| %>
+  
+  <tr>
+  	<td>
+        <span>
+  			<%= link_to article.title, "articles/#{article.id}" %>
+        </span>
+    </td>
+    <td>
+    	<%= article.body %>
+    </td>
+    <td>
+      	<%= article.weather %>
+	</td>
+  <td>
+    <%= attachment_image_tag article, :image, :fill, 30, 30, format: 'jpeg' %>
+  </td>
+	<td>
+  		<%= article.updated_at.strftime("%Y年%m月%d日 %H時%M分") %>
+    </td>
+<% end %>
+</table>
+</div>
+
+</div>
+</div>

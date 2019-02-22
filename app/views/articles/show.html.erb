@@ -1,0 +1,18 @@
+<h2>タイトル</h2>
+<p><%= @article.title %></p>
+<h2>本文</h2>
+<p><%= @article.body %></p>
+<h2>天気</h2>
+<p><%= @article.weather %></p>
+
+<%= attachment_image_tag @article, :image, :fill, 300, 300, format: 'jpeg', fallback: "default.png" %>
+
+<h2>最終更新日</h2>
+<p><%= @article.updated_at.strftime("%Y年%m月%d日 %H時%M分") %></p>
+<span>
+	<%= link_to "一覧へ", "/articles" %>
+
+	<%= link_to "編集", "/articles/#{@article.id}/edit" %>
+	<%= link_to "削除", destroy_article_path(@article.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+	
+</span>
